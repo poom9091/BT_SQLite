@@ -1,0 +1,42 @@
+<div name="modelUpdate">
+  <h4>Update Information</h4>
+  <div>
+    <form action="{{url_for('update_table_join',id=idTable.id)}}" method="POST">
+      <div>
+        <label>Name:</label>
+        <input type="hidden" name="id" value="{{idTable.id}}" />
+        <select name="name" required="1">
+          {% for row in students %}
+            {% if row.id==idTable.jname %}
+            <option value="{{row.id}}" selected>{{row.Stuname}}</option>
+            {% else %}
+            <option value="{{row.id}}">{{row.Stuname}}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+        <!-- <input type="text" name="name" value="{{idTable.jname}}" /> -->
+      </div>
+
+      <div>
+        <label>Subject:</label>
+        <!-- <input type="text" name="sub" value="{{idTable.jsub}}" /> -->
+        <select name="sub" required="1">
+          {% for row in subjects %}
+            {% if row.id==idTable.jsub %}
+            <option value="{{row.id}}" selected>{{row.subject}}</option>
+            {% else %}
+            <option value="{{row.id}}">{{row.subject}}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+
+      <button type="submit">
+        Update
+      </button>
+    </form>
+  </div>
+  <button onclick="location.href='/'">
+    Close
+  </button>
+</div>

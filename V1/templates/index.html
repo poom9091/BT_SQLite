@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div>
+  <h1>Python Flask CRUD Web Application Development </h1>
+</div>
+
+<h2>
+  Manage <b>Employees </b>
+  <button type="button" id="addEmployee">
+    Add New Employees
+  </button>
+</h2>
+
+{% with messages = get_flashed_messages() %} {% if messages %} {% for
+message in messages %}
+
+<div id="alert">
+  <button type="button" onclick="removealert()" >X </button>
+  {{message}}
+</div>
+
+{% endfor %} {% endif %} {% endwith %}
+
+<!-- Show list -->
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Phone</th>
+    <th>Action</th>
+  </tr>
+
+  {% for row in employees %}
+  <tr>
+    <td>{{row.id}}</td>
+    <td>{{row.name}}</td>
+    <td>{{row.email}}</td>
+    <td>{{row.phone}}</td>
+
+    <td>
+      <button id="edit{{row.id}}" onclick="editUser('{{row.id}}')">Edit</button>
+      <button onclick="del('{{row.id}}')">Delete</button>
+      <!-- <a href="/delete/{{row.id}}" onclick="return confirm('Are You Sure To Delete ?')">Delete</a> -->
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% for row in employees %}
+<!-- Modal Edit Employee-->
+<div id="modaledit{{row.id}}" name="modelUpdate" hidden="true" role="dialog">
+  <h4>Update Information</h4>
+  <div>
+    <form action="{{url_for('update')}}" method="POST" >
+      <div>
+        <label>Name:</label>
+        <input type="hidden" name="id" value="{{row.id}}" />
+        <input type="text" name="name" value="{{row.name}}" />
+      </div>
+
+      <div>
+        <label>Email:</label>
+        <input type="text" name="email" value="{{row.email}}" />
+      </div>
+
+      <div>
+        <label>Phone:</label>
+        <input type="text" name="phone" value="{{row.phone}}" />
+      </div>
+
+      <button type="submit">
+        Update
+      </button>
+    </form>
+  </div>
+  <button type="button">
+    Close
+  </button>
+</div>
+{% endfor %}
+
+<!-- Modal Add Employee-->
+
+<div id="modelEmployee" hidden="false">
+  <h4>Add Employee</h4>
+  <form action="{{url_for('insert')}}" method="POST">
+    <div>
+      <label>Name:</label>
+      <input type="text" name="name" required="1" />
+    </div>
+
+    <div>
+      <label>Email:</label>
+      <input type="email" name="email" required="1" />
+    </div>
+
+    <div>
+      <label>Phone:</label>
+      <input type="number" name="phone" required="1" />
+    </div>
+    <button type="submit">
+      Add Employee
+    </button>
+  </form>
+  <div>
+    <button type="button" id="closeaddEM">
+      Close
+    </button>
+  </div>
+</div>
+</div>
+<script>
+
+  function editUser(idEM) {
+    modelUpdate = document.getElementById("modaledit" + idEM)
+    let listUpload = document.getElementsByName('modelUpdate')
+    for (i in listUpload) {
+      document.getElementsByName('modelUpdate')[i].hidden = true
+    }
+    modelUpdate.hidden = false
+  }
+
+  function removealert(){
+    document.getElementById("alert").remove()
+  }
+
+  function del(id){
+    location.href='/delete/'+id
+    return confirm('Are You Sure To Delete ?')
+  }
+
+  document.getElementById("addEmployee")
+    .addEventListener("click", () => {
+      addEM = document.getElementById("modelEmployee")
+      if (!addEM.hidden) {
+        addEM.hidden = true;
+      } else {
+        addEM.hidden = false;
+      }
+    });
+
+  document.getElementById("closeaddEM")
+    .addEventListener('click', () => {
+      document.getElementById("modelEmployee").hidden = true
+    });
+  
+</script>
+{% endblock %}

@@ -1,0 +1,34 @@
+<!-- Modal Add Student-->
+<div id="modelStudent">
+  <h4>Add Table</h4>
+  <form action="{{url_for('insertjoin')}}" method="POST">
+    <div>
+      <label>Name:</label>
+      <!-- <input type="text" name="name" required="1" /> -->
+      <select name="name" required="1">
+        {% for row in students %}
+        <option value="{{row.id}}">{{row.Stuname}}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div>
+      <label>Subject:</label>
+      <!-- <input type="text" name="sub" required="1" /> -->
+      <select name="sub" required="1">
+        {% for row in subjects %}
+        <option value="{{row.id}}">{{row.subject}}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <button type="submit">
+      Add Student
+    </button>
+  </form>
+  <div>
+    <button onclick="location.href='/'">
+      Close
+    </button>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<!-- Modal Add Student-->
+<div id="modelStudent" >
+    <h4>Add Student</h4>
+    <form action="{{url_for('insertstu')}}" method="POST">
+      <div>
+        <label>Name:</label>
+        <input type="text" name="name" required="1" />
+      </div>
+  
+      <div>
+        <label>Email:</label>
+        <input type="email" name="email" required="1" />
+      </div>
+  
+      <div>
+        <label>Phone:</label>
+        <input type="number" name="phone" required="1" />
+      </div>
+      <button type="submit">
+        Add Student
+      </button>
+    </form>
+    <div>
+      <button onclick="location.href='/'">
+        Close
+      </button>
+    </div>
+</div>

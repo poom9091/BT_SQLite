@@ -1,0 +1,22 @@
+<div>
+    <h4>Add Subject</h4>
+    <form action="{{url_for('insertsub')}}" method="POST">
+        <div>
+            <label>Subject:</label>
+            <input type="text" name="subject" required="1" />
+        </div>
+
+        <div>
+            <label>Teacher:</label>
+            <input type="text" name="teacher" required="1" />
+        </div>
+        <button type="submit">
+            Add Subject
+        </button>
+    </form>
+    <div>
+        <button onclick="location.href='/'">
+            Close
+        </button>
+    </div>
+</div>

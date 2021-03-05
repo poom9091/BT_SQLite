@@ -1,0 +1,29 @@
+<div id="modaledit{{student.id}}" name="modelUpdate">
+    <h4>Update Information</h4>
+    <div>
+      <form action="{{url_for('updatestu',id=student.id)}}" method="POST" >
+        <div>
+          <label>Name:</label>
+          <input type="hidden" name="id" value="{{student.id}}" />
+          <input type="text" name="name" value="{{student.Stuname}}" />
+        </div>
+  
+        <div>
+          <label>Email:</label>
+          <input type="text" name="email" value="{{student.Stuemail}}" />
+        </div>
+  
+        <div>
+          <label>Phone:</label>
+          <input type="text" name="phone" value="{{student.Stuphone}}" />
+        </div>
+  
+        <button type="submit">
+          Update
+        </button>
+      </form>
+    </div>
+    <button onclick="location.href='/'">
+      Close
+    </button>
+  </div>

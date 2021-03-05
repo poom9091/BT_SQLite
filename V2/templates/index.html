@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Flask CRUD</title>
+</head>
+
+<body>
+  <div>
+    <h1>Python Flask CRUD Web Application Development </h1>
+    <!-- Alert -->
+    {% with messages = get_flashed_messages() %} {% if messages %} {% for
+      message in messages %}
+
+      <div id="alert">
+        <button type="button" onclick="removealert()">X </button>
+        {{message}}
+      </div>
+    {% endfor %} {% endif %} {% endwith %}
+  </div>
+
+  <!-- Table Join -->
+  <div id="table_join" style=" margin: 3rem;">
+    <h2>
+      Manage <b>Join </b>
+      <button onclick="insertjoin()">
+        Add New 
+      </button>
+    </h2>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Subect</th>
+        <th>Teacher</th>
+        <th>Action</th>
+      </tr>
+
+      {% for row in alldata %}
+      <tr>
+        <td>{{row.id}}</td>
+        <td>{{row.Stuname}}</td>
+        <td>{{row.subject}}</td>
+        <td>{{row.teacher}}</td>
+        <td>
+          <button id="edit{{row.id}}" onclick="updateJoin('{{row.id}}')">Edit</button>
+          <button onclick="delJoin('{{row.id}}')">Delete</button>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+  <div class="inline-flask">
+    <!-- Table  student -->
+    <div id=student style="max-width: max-content ; margin: 3rem;">
+      <h2>
+        Manage <b>Student </b>
+        <button onclick="insertstu()">
+          Add New Student
+        </button>
+      </h2>
+
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Action</th>
+        </tr>
+
+        {% for row in students %}
+        <tr>
+          <td>{{row.id}}</td>
+          <td>{{row.Stuname}}</td>
+          <td>{{row.Stuemail}}</td>
+          <td>{{row.Stuphone}}</td>
+
+          <td>
+            <button id="edit{{row.id}}" onclick="updateStudent('{{row.id}}')">Edit</button>
+            <button onclick="delStudent('{{row.id}}')">Delete</button>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+
+    <!-- Table  Subject -->
+    <div id=subject style="max-width: max-content ; margin: 3rem;">
+      <h2>
+        Manage <b>Subject </b>
+        <button onclick="insertsub()">
+          Add New Subject
+        </button>
+      </h2>
+
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>Subject</th>
+          <th>Teacher</th>
+          <th>Action</th>
+        </tr>
+
+        {% for row in Subject %}
+        <tr>
+          <td>{{row.id}}</td>
+          <td>{{row.subject}}</td>
+          <td>{{row.teacher}}</td>
+
+          <td>
+            <button id="edit{{row.id}}" onclick="updateSubject('{{row.id}}')">Edit</button>
+            <button onclick="delSubject('{{row.id}}')">Delete</button>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+
+    </div>
+  </div>
+
+  <script>
+    // function insert //
+    //table Subject
+    function insertstu() {
+      location.href = "{{url_for('insertstu')}}"
+    }
+    //table Subject
+    function insertsub() {
+      location.href = "{{url_for('insertsub')}}"
+    }
+    //table join
+    function insertjoin(){
+      location.href = "{{url_for('insertjoin')}}"
+    }
+
+    // function Update ///
+    //table Student
+    function updateStudent(idStu) {
+      location.href = '/updateStu/' + idStu
+    }
+    //table Subject
+    function updateSubject(idSub) {
+      location.href = '/updateSub/' + idSub
+    }
+    //table Join
+    function updateJoin(idJoin) {
+      location.href = '/updateTable/' + idJoin
+    }
+
+    // function delete //
+    //table Student
+    function delStudent(id) {
+      let c = confirm('Are You Sure To Delete ?')
+      if(c==true) location.href = '/deleteStu/' + id
+    }
+    //table Subject 
+    function delSubject(id) {
+      let c = confirm('Are You Sure To Delete ?')
+      if(c==true) location.href = '/deleteSub/' + id
+    }
+     //table Subject
+    function delJoin(id) {
+      let c = confirm('Are You Sure To Delete ?')
+      if(c==true) location.href = '/deleteTable/' + id
+    }
+
+    //removeAlert
+    function removealert(){
+      document.getElementById("alert").remove()
+    }
+    
+  </script>
+  <style>
+    .inline-flask {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  </style>
+</body>
+
+</html>
